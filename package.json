@@ -1,0 +1,31 @@
+{
+  "name": "adminservice",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "build": "tsc",
+    "test": "Run test..."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.10.3",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^9.2.0",
+    "aws-sdk": "^2.1513.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.4",
+    "fastify-autoroutes": "^3.0.2",
+    "jose": "^5.2.2",
+    "mysql2": "^3.6.5",
+    "sequelize": "^6.35.1",
+    "stripe": "^14.8.0",
+    "ts-node": "^10.9.1"
+  },
+  "description": ""
+}
