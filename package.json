@@ -13,7 +13,7 @@
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "@types/bcrypt": "^5.0.2",
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.11.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
@@ -30,6 +30,7 @@
     "aws-sdk": "^2.1513.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.4",
+    "fastify": "^4.26.1",
     "fastify-autoroutes": "^3.0.2",
     "jose": "^5.2.2",
     "mysql2": "^3.6.5",
