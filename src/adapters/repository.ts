@@ -33,8 +33,8 @@ export class Repository implements IRepository {
         } finally {
             this.modelDB.disconnectModel();
         }
-    }    
-    
+    }
+
 
     update(data: IDomain['data'], arg0: Object): Promise<Object> {
         try {
@@ -48,10 +48,16 @@ export class Repository implements IRepository {
         }
     }
 
-    login(data: IDomain['data']): Promise<Object> {
+    async login(data: IDomain['data']): Promise<Object> {
         try {
+            const model = await this.modelDB.syncModel();
+            const result = await model.findAll({
+                where: {
+                    adm_email: data.adm_email
+                }
+            });
 
-            return Promise.resolve({ success: 'ok' });
+            return result
         } catch (error) {
             throw error
         } finally {
