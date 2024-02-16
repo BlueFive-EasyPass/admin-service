@@ -1,21 +1,72 @@
+import { Model } from "sequelize";
+import { IDomain } from "../interfaces/domainInterface";
 import { IModelDB } from "../interfaces/interfaceModel";
 import { IRepository } from "../interfaces/interfaceRepository";
 
 export class Repository implements IRepository {
     private modelDB: IModelDB
+
     constructor(modelDB: IModelDB) {
         this.modelDB = modelDB
     }
-    save(data: { bussines_buss_CNPJ: string; list_tipo: string; list_CPF: string; }): Promise<any> {
-        throw new Error("Method not implemented.");
+
+
+    async save(data: IDomain['data']): Promise<Object> {
+        try {
+            const model = await this.modelDB.syncModel();
+
+            const result = await model.create({ ...data })
+
+            return result;
+        } catch (error) {
+            throw error;
+        } finally {
+            this.modelDB.disconnectModel();
+        }
     }
-    get(data: { bussines_buss_CNPJ: string; list_tipo: string; list_CPF: string; }): Promise<any> {
-        throw new Error("Method not implemented.");
+
+    search(data: IDomain['data']): Promise<Object[]> {
+        try {
+            return Promise.resolve([{ success: 'ok' }]);
+        } catch (error) {
+            throw error;
+        } finally {
+            this.modelDB.disconnectModel();
+        }
+    }    
+    
+
+    update(data: IDomain['data'], arg0: Object): Promise<Object> {
+        try {
+
+            return Promise.resolve({ success: 'ok' });
+
+        } catch (error) {
+            throw error
+        } finally {
+            this.modelDB.disconnectModel();
+        }
     }
-    update(data: { bussines_buss_CNPJ: string; list_tipo: string; list_CPF: string; }, arg1: any): Promise<any> {
-        throw new Error("Method not implemented.");
+
+    login(data: IDomain['data']): Promise<Object> {
+        try {
+
+            return Promise.resolve({ success: 'ok' });
+        } catch (error) {
+            throw error
+        } finally {
+            this.modelDB.disconnectModel();
+        }
     }
-    delete(bussinesData: { bussines_buss_CNPJ: string; list_tipo: string; list_CPF: string; }): Promise<any> {
-        throw new Error("Method not implemented.");
+
+    delete(data: IDomain['data']): Promise<Object> {
+        try {
+
+            return Promise.resolve({ success: 'ok' });
+        } catch (error) {
+            throw error
+        } finally {
+            this.modelDB.disconnectModel();
+        }
     }
 }

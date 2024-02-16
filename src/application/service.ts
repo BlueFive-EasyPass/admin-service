@@ -7,18 +7,50 @@ export class Service implements IService {
     constructor(repository: IRepository) {
         this.repository = repository
     }
+    save(data: IDomain['data']): Promise<Object> {
+        try {
+            const result = this.repository.save(data)
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
 
-    save(data: IDomain['data']): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    search(data: IDomain['data']): Promise<Object[]> {
+        try {
+            const result = this.repository.search(data)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
-    search(data: IDomain['data']): Promise<any> {
-        throw new Error("Method not implemented.");
+
+    update(data: IDomain['data'], arg0: Object): Promise<Object> {
+        try {
+            const result = this.repository.update(data, arg0)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
-    update(data: IDomain['data'], arg1: any): Promise<any> {
-        throw new Error("Method not implemented.");
+
+    login(data: IDomain['data']): Promise<Object> {
+        try {
+            const result = this.repository.login(data)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
-    delete(data: IDomain['data']): Promise<any> {
-        throw new Error("Method not implemented.");
+
+    delete(data: IDomain['data']): Promise<Object> {
+        try {
+            const result = this.repository.delete(data)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
+
 
 }

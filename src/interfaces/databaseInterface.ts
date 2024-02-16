@@ -1,4 +1,5 @@
-import { Sequelize } from "sequelize"
+import { Optional, Sequelize } from "sequelize"
+import { IDomain } from "./domainInterface"
 
 export interface IDatabaseConnection {
    Connect: () => void

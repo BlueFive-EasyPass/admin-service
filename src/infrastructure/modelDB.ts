@@ -2,7 +2,6 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 import { IDatabaseConnection } from '../interfaces/databaseInterface';
 import { IModelDB } from '../interfaces/interfaceModel';
 
-
 export class ModelDB implements IModelDB {
     private connection: IDatabaseConnection;
     private instance: Sequelize
@@ -42,20 +41,20 @@ export class ModelDB implements IModelDB {
         });
     }
 
-    async syncModel(): Promise<Model> {
+    async syncModel() {
         try {
-            const admin = this.defineModel();
+            const model = this.defineModel();
             this.connection.Connect();
             await this.instance.sync();
             console.log('Modelo sincronizado com o banco de dados');
-            return new admin;
+            return model;
         } catch (err) {
             console.error('Erro ao sincronizar o modelo:', err);
             throw err;
         }
     }
 
-    disconnectModel(): void {
+    disconnectModel() {
         console.log('Modelo desconectado');
         this.connection.Disconnect();
     }

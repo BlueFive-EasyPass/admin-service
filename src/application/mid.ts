@@ -22,13 +22,13 @@ export class Mid implements IMid {
         );
     }
 
-    async createHash(): Promise<any> {
+    async createHash(): Promise<string> {
         const hash = await bcrypt.hash(this.data.adm_senha, 10);
 
         return hash
     }
 
-    async compareHash(hash: any): Promise<boolean> {
+    async compareHash(hash: string): Promise<boolean> {
         const match = await bcrypt.compare(this.data.adm_senha, hash)
         if (match) {
             return true

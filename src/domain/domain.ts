@@ -8,17 +8,50 @@ export class Domain implements IDomain {
         this.data = data
         this.service = service
     }
-    
-    save() {
-        throw new Error("Method not implemented.");
+
+    save(): Promise<Object> {
+        try {
+            const result = this.service.save(this.data)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
-    search() {
-        throw new Error("Method not implemented.");
+
+    search(): Promise<Object[]> {
+        try {
+            const result = this.service.search(this.data)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
-    update(arg0: any) {
-        throw new Error("Method not implemented.");
+
+    update(arg0: Object): Promise<Object> {
+        try {
+            const result = this.service.update(this.data, arg0)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
-    delete() {
-        throw new Error("Method not implemented.");
+
+    login(): Promise<Object> {
+        try {
+            const result = this.service.login(this.data)
+            return result
+        } catch (error) {
+            throw error
+        }
     }
+
+    delete(): Promise<Object> {
+        try {
+            const result = this.service.delete(this.data)
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
+
 }

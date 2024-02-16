@@ -1,6 +1,6 @@
 import { Model } from "sequelize";
 
 export interface IModelDB {
-    syncModel(): Promise<Model>;
+    syncModel(): Promise<any>;
     disconnectModel(): void;
 }

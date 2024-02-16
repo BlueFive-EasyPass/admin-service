@@ -1,13 +1,15 @@
 export interface IDomain {
     data: {
-        adm_nome: string,
-        adm_email: string,
-        adm_senha: string,
-        adm_level: number
+        adm_id: number | null
+        adm_nome: string | null,
+        adm_email: string | null,
+        adm_senha: string | null,
+        adm_level: number | null
     }
 
-    save(): Object
-    search(): Array<Object>
-    update(arg0: Object): Object
-    login(): Object
+    save(): Promise<Object> 
+    search(): Promise<Array<Object>> 
+    update(arg0: Object): Promise<Object> 
+    login(): Promise<Object> 
+    delete(): Promise<Object> 
 }
