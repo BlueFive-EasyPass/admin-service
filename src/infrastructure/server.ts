@@ -16,7 +16,7 @@ app.register(require('fastify-autoroutes'), {
 const start = async () => {
   try {
     
-    await app.listen({ port: 3005 });
+    await app.listen({ port: 3004 });
     app.log.info(`Admin Service rodando em ${app.server.address()}`);
   } catch (err) {
     app.log.error(err);
