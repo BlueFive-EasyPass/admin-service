@@ -1,4 +1,5 @@
-import { Model } from "sequelize";
+
+import { IDatabaseConnection } from "../interfaces/databaseInterface";
 import { IDomain } from "../interfaces/domainInterface";
 import { IModelDB } from "../interfaces/interfaceModel";
 import { IRepository } from "../interfaces/interfaceRepository";
@@ -14,7 +15,6 @@ export class Repository implements IRepository {
     async save(data: IDomain['data']): Promise<Object> {
         try {
             const model = await this.modelDB.syncModel();
-
             const result = await model.create({ ...data })
 
             return result;
@@ -25,9 +25,12 @@ export class Repository implements IRepository {
         }
     }
 
-    search(data: IDomain['data']): Promise<Object[]> {
+    async search(data: IDomain['data']): Promise<Object[]> {
         try {
-            return Promise.resolve([{ success: 'ok' }]);
+            const model = await this.modelDB.syncModel();
+            const result = await model.findAll({ ...data })
+            
+            return result;
         } catch (error) {
             throw error;
         } finally {
@@ -36,11 +39,18 @@ export class Repository implements IRepository {
     }
 
 
-    update(data: IDomain['data'], arg0: Object): Promise<Object> {
+    async update(data: IDomain['data'], arg0: Object): Promise<Object> {
         try {
+            const model = await this.modelDB.syncModel();
+            console.log(arg0, data);
+            
+            const result = await model.update({ ...data }, {
+                where: {
+                    ...arg0
+                }
+            })
 
-            return Promise.resolve({ success: 'ok' });
-
+            return result[0]
         } catch (error) {
             throw error
         } finally {
@@ -57,6 +67,8 @@ export class Repository implements IRepository {
                 }
             });
 
+            console.log(result);
+            
             return result
         } catch (error) {
             throw error
@@ -65,10 +77,16 @@ export class Repository implements IRepository {
         }
     }
 
-    delete(data: IDomain['data']): Promise<Object> {
+    async delete(data: IDomain['data']): Promise<Object> {
         try {
+            const model = await this.modelDB.syncModel();
+            const result = await model.destroy({
+                where: {
+                    ...data
+                }
+            })
 
-            return Promise.resolve({ success: 'ok' });
+            return result
         } catch (error) {
             throw error
         } finally {

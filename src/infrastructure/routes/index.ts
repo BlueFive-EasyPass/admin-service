@@ -49,15 +49,13 @@ export default () => <Resource>{
         url: '/:email',
         handler: async (request: FastifyRequest, reply: FastifyReply) => {
             const query = request.body as IDomain['data']
-            const email = request.params as string
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const { email } = request.params as any
 
             const param = {
                 adm_email: email
             }
 
-
-            if (email === null || email === undefined || email === "" || !emailPattern.test(email)) {
+            if (email === null || email === undefined || email === "") {
                 reply.code(400).send({ erro: "Parametro enviado é inválido" })
 
             } else {
@@ -65,6 +63,8 @@ export default () => <Resource>{
                 const controller: IController = instanceManager.getController();
 
                 try {
+                    console.log(param);
+                    
                     await controller.Update(param, reply)
 
                 } catch (error) {

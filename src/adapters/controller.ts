@@ -16,17 +16,20 @@ export class Controller implements IController {
     async Login(reply: FastifyReply): Promise<void> {
         try {
 
-            const result = this.domain.login()
-
-            if (this.domain.data['adm_senha']) {
-                let compareHash = this.mid.compareHash(this.domain.data['adm_senha'])
-            }
-
+            const result: any = await this.domain.login()
+            
             if (result) {
-                reply.code(200).send({ data: result });
-            } else {
-                reply.code(500).send({ error: 'Erro ao salvar no banco' });
+            console.log(result);
+            
+                    let compareHash = await this.mid.compareHash(result[0].adm_senha)
+                    if (compareHash) {
+                        let token = await this.mid.createToken()
+                        reply.code(200).send({ data: token });
+                    }
+                    reply.code(500).send({ error: 'Erro ao logar1' });
             }
+
+            reply.code(500).send({ error: 'Erro ao logar' });
         } catch (error) {
             reply.code(500).send({ error: error });
             throw error;
@@ -39,9 +42,8 @@ export class Controller implements IController {
 
             if (result) {
                 reply.code(200).send({ data: result });
-            } else {
-                reply.code(500).send({ error: 'Erro ao salvar no banco' });
             }
+            reply.code(500).send({ error: 'Erro ao salvar no banco' });
         } catch (error) {
             reply.code(500).send({ error: error });
             throw error;
@@ -54,9 +56,8 @@ export class Controller implements IController {
 
             if (result) {
                 reply.code(200).send({ data: result });
-            } else {
-                reply.code(500).send({ error: 'Erro ao buscar no banco' });
             }
+            reply.code(500).send({ error: 'Erro ao buscar no banco' });
         } catch (error) {
             reply.code(500).send({ error: error });
             throw error;
@@ -67,10 +68,9 @@ export class Controller implements IController {
             const result = await this.domain.update(arg0);
 
             if (result) {
-                reply.code(200).send({ data: result });
-            } else {
-                reply.code(500).send({ error: 'Erro ao atualizar no banco' });
+                reply.code(200).send({ data: `${result} item alterado no Banco de Dados` });
             }
+            reply.code(500).send({ error: 'Erro ao atualizar no banco' });
         } catch (error) {
             reply.code(500).send({ error: error });
             throw error;
@@ -83,7 +83,7 @@ export class Controller implements IController {
             const result = await this.domain.delete();
 
             if (result) {
-                reply.code(200).send({ data: result });
+                reply.code(200).send({ data: `${result} item excluido no Banco de Dados` });
             } else {
                 reply.code(500).send({ error: 'Erro ao excluir do banco' });
             }

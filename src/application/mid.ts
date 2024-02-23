@@ -29,6 +29,8 @@ export class Mid implements IMid {
     }
 
     async compareHash(hash: string): Promise<boolean> {
+        console.log(hash, this.data.adm_senha);
+        
         const match = await bcrypt.compare(this.data.adm_senha, hash)
         if (match) {
             return true
