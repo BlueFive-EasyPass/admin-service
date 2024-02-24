@@ -28,7 +28,11 @@ export class Repository implements IRepository {
     async search(data: IDomain['data']): Promise<Object[]> {
         try {
             const model = await this.modelDB.syncModel();
-            const result = await model.findAll({ ...data })
+            const result = await model.findAll({ 
+                where: {
+                    ...data
+                } 
+            })
             
             return result;
         } catch (error) {
